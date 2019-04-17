@@ -5,7 +5,7 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/happyx
+    working_directory: ~/mtg-collection-api
     docker:
       - image: circleci/openjdk:11-jdk-browsers
     steps:
