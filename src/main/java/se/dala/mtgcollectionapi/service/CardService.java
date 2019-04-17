@@ -9,7 +9,7 @@ import se.dala.mtgcollectionapi.model.MtgSetEdit;
 
 import java.util.ArrayList;
 import java.util.List;
-
+//little comment
 /*
 Reason for having a server that map the MtG API is that I want to have a different set of cards in my collection view than
 wizard of the coast gives me. I also can't seem to find every card on Gatherer.com so to gather cards from other resources
