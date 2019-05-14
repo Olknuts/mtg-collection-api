@@ -7,9 +7,8 @@ import se.dala.mtgcollectionapi.client.MtGClient;
 import se.dala.mtgcollectionapi.model.CardInfo;
 import se.dala.mtgcollectionapi.model.MtgSetEdit;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 //little comment
 /*
 Reason for having a server that map the MtG API is that I want to have a different set of cards in my collection view than
@@ -27,19 +26,16 @@ public class CardService     {
 
     public MtgSetEdit getSet(String setCode) {
         MtgSet set = client.getSet(setCode);
-        set.getCards().sort(Comparator.comparing(a -> a.getNumber()));
-        for (Card card: set.getCards()
-        ) {
-            System.out.println(card.getNumber() + " " + card.getName());
-        }
         return parseSet(set);
     }
 
     private MtgSetEdit parseSet(MtgSet set) {;
-        List<CardInfo> cardList = new ArrayList<>();
+        Set<CardInfo> cardSet = new HashSet<>();
         for (Card card : set.getCards()) {
-            cardList.add(parseCard(card));
+            cardSet.add(parseCard(card));
         }
+        List<CardInfo> cardList = cardSet.stream().collect(Collectors.toList());
+        cardList.sort(Comparator.comparing(a -> Integer.parseInt(a.getNumber())));
         return new MtgSetEdit(set.getName(), cardList);
     }
 
