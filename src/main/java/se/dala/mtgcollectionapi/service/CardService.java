@@ -8,6 +8,7 @@ import se.dala.mtgcollectionapi.model.CardInfo;
 import se.dala.mtgcollectionapi.model.MtgSetEdit;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 //little comment
 /*
@@ -26,6 +27,11 @@ public class CardService     {
 
     public MtgSetEdit getSet(String setCode) {
         MtgSet set = client.getSet(setCode);
+        set.getCards().sort(Comparator.comparing(a -> a.getNumber()));
+        for (Card card: set.getCards()
+        ) {
+            System.out.println(card.getNumber() + " " + card.getName());
+        }
         return parseSet(set);
     }
 
